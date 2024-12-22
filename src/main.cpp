@@ -1,9 +1,11 @@
 #include <Arduino.h>
 #include <WiFi.h>
+#include "time.h"
 #include "config.h"
 
 // put function declarations here:
 void connectWifi();
+void configureClock();
 
 void setup() {
   // put your setup code here, to run once:
@@ -15,7 +17,8 @@ void setup() {
   connectWifi();
   delay(1000);
 
-  int result = myFunction(2, 3);
+  // Configure NTP clock
+  configureClock();
 }
 
 void loop() {
@@ -32,4 +35,11 @@ void connectWifi()
   while (WiFi.status() != WL_CONNECTED)
   { delay(500); }
   Serial.println("SUCCESS");
+}
+
+void configureClock()
+{
+  configTime(0, 0, NTPSERVER);
+  setenv("TZ", TIMEZONE, 1);
+  tzset();
 }
