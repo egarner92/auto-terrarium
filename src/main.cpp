@@ -6,7 +6,9 @@ int myFunction(int, int);
 
 void setup() {
   // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+
+  // Initialize serial communication
+  Serial.begin(115200);
 }
 
 void loop() {
