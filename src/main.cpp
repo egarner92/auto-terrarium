@@ -4,7 +4,6 @@
 
 // put function declarations here:
 void connectWifi();
-int myFunction(int, int);
 
 void setup() {
   // put your setup code here, to run once:
@@ -33,8 +32,4 @@ void connectWifi()
   while (WiFi.status() != WL_CONNECTED)
   { delay(500); }
   Serial.println("SUCCESS");
-}
-
-int myFunction(int x, int y) {
-  return x + y;
 }
