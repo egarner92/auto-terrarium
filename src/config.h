@@ -1,14 +1,16 @@
 // All user-specific data
-const char *SSID = "Bbox-765231F0";
-const char *PASSWORD = "14bwgSJE67xxXmMwsm";
 
-const char *NTPSERVER = "pool.ntp.org";
-const char *TIMEZONE = "CET-1CEST,M3.5.0,M10.5.0/3";
+// WiFi credentials
+constexpr char SSID[] = "Bbox-765231F0";
+constexpr char PASSWORD[] = "14bwgSJE67xxXmMwsm";
 
-// Periferal device pins
+// NTP server and timezone
+constexpr char NTPSERVER[] = "pool.ntp.org";
+constexpr char TIMEZONE[] = "CET-1CEST,M3.5.0,M10.5.0/3";
+
+// Peripheral device pins
 // SDA (Serial Data Line): GPIO 21
 // SCL (Serial Clock Line): GPIO 22
-// Leave 25 available for possible RTC integration
 
 // Prefer pins on same side as GPIO 21-22 for compact design
 constexpr int FAN_PIN {19};
