@@ -20,6 +20,7 @@ AnalogActuator heater("heater", HEATER_PIN);
 AnalogActuator fan("fan", FAN_PIN);
 DigitalActuator pump("pump", PUMP_PIN);
 
+// Configure test PID circuit
 int testSensorPin = 32;
 int testActuatorPin = 33;
 AnalogSensor testSensor("testSensor", testSensorPin);
@@ -39,12 +40,16 @@ void setup()
 
   // Configure NTP clock
   configureClock();
+
+  // Configure test PID setpoint
+  testSetpoint = 100;
 }
 
 void loop()
 {
   unsigned long now = millis();
 
+  // Test pid control loop
   if (1.0 / (now - testPID.getLastTime()) >= testPID.getFreq())
   {
     testInput = map(testSensor.read(), 0, adc12_max, 0, testActuator.getMax());
