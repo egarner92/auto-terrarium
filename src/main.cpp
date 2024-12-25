@@ -9,10 +9,10 @@ void connectWifi();
 void configureClock();
 
 // Declare global variables
-UDPServer server;
+UDPServer server; // Server for remote monitoring and control
 
-void setup() {
-  
+void setup()
+{
   // Initialize serial communication
   Serial.begin(115200);
 
@@ -24,10 +24,12 @@ void setup() {
   configureClock();
 }
 
-void loop() {
+void loop()
+{
 }
 
-// put function definitions here:
+// Helper function definitions
+
 void connectWifi()
 {
   Serial.print("Connecting to Wifi network: ");
@@ -35,7 +37,9 @@ void connectWifi()
   WiFi.mode(WIFI_STA);
   WiFi.begin(SSID, PASSWORD);
   while (WiFi.status() != WL_CONNECTED)
-  { delay(500); }
+  {
+    delay(500);
+  }
   Serial.println("SUCCESS");
 }
 
