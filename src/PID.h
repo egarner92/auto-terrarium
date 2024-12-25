@@ -17,6 +17,7 @@ public:
     PID(int &input, int &ouput, int &setpoint, int freq);
     void setParams(const double kp, const double ki, const double kd);
     void compute();
+    unsigned long getLastTime();
     void resetTime();
     int getFreq();
 };

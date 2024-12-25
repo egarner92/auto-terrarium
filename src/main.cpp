@@ -28,8 +28,6 @@ int testInput, testOutput, testSetpoint;
 int testFreq = 1000;
 PID testPID(testInput, testOutput, testSetpoint, testFreq);
 
-unsigned long lastTime;
-
 void setup()
 {
   // Initialize serial communication
@@ -41,22 +39,18 @@ void setup()
 
   // Configure NTP clock
   configureClock();
-
-  lastTime = millis();
 }
 
 void loop()
 {
   unsigned long now = millis();
 
-  if (1.0 / (now - lastTime) >= testPID.getFreq())
+  if (1.0 / (now - testPID.getLastTime()) >= testPID.getFreq())
   {
-    testInput = testSensor.read();
+    testInput = map(testSensor.read(), 0, adc12_max, 0, testActuator.getMax());
     testPID.compute();
     testActuator.set(testOutput);
   }
-
-  lastTime = now;
 }
 
 // Helper function definitions

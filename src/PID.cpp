@@ -44,6 +44,11 @@ void PID::compute()
     lastError = error;
     }
 
+    unsigned long PID::getLastTime()
+    {
+        return lastTime;
+    }
+
     void PID::resetTime()
     {
         lastTime = millis();
