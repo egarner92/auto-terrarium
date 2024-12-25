@@ -18,6 +18,7 @@ UDPServer server; // Server for remote monitoring and control
 AHTSensor aht; // temperature and humidity sensor
 AnalogActuator heater("heater", HEATER_PIN);
 AnalogActuator fan("fan", FAN_PIN);
+DigitalActuator pump("pump", PUMP_PIN);
 
 
 void setup()
