@@ -14,7 +14,9 @@ void configureClock();
 
 // Declare global variables
 UDPServer server; // Server for remote monitoring and control
-AHTSensor aht;
+AHTSensor aht; // temperature and humidity sensor
+AnalogActuator heater("heater", HEATER_PIN);
+AnalogActuator fan("fan", FAN_PIN);
 
 
 void setup()
