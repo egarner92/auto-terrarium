@@ -1,21 +1,20 @@
 #include "UDPServer.h"
 
-
 UDPServer::UDPServer(int port)
 {
-// Configure
-if (udp.listen(port))
-{
-// Print server info
-Serial.print("UDP Listening on IP: ");
-Serial.print(WiFi.localIP());
-Serial.print(" Port: ");
-Serial.println(port);
+    // Configure
+    if (udp.listen(port))
+    {
+        // Print server info
+        Serial.print("UDP Listening on IP: ");
+        Serial.print(WiFi.localIP());
+        Serial.print(" Port: ");
+        Serial.println(port);
 
-// Define packet handling
-udp.onPacket([this](AsyncUDPPacket packet)
-            { respondToPacket(packet); });
-}
+        // Define packet handling
+        udp.onPacket([this](AsyncUDPPacket packet)
+                     { respondToPacket(packet); });
+    }
 }
 
 void UDPServer::respondToPacket(AsyncUDPPacket packet)
@@ -37,10 +36,10 @@ std::tuple<UDPServer::ClientCommand, float> UDPServer::parseCommandString(const 
     // Handle case without numerical argument
     if (position == nullptr)
     {
-    ClientCommand cmd = clientCommandFromString(cmdStr);
-    char *cmdKeyword = strdup(cmdStr);
-    float value = 0.0;
-    return {cmd, value};
+        ClientCommand cmd = clientCommandFromString(cmdStr);
+        char *cmdKeyword = strdup(cmdStr);
+        float value = 0.0;
+        return {cmd, value};
     }
 
     // Parse input string
@@ -69,26 +68,26 @@ std::tuple<UDPServer::ClientCommand, float> UDPServer::parseCommandString(const 
 }
 
 UDPServer::ClientCommand UDPServer::clientCommandFromString(const char *cmdStr)
+{
+    if (strcmp(cmdStr, "GET_STORED_DATAPOINTS") == 0)
     {
-      if (strcmp(cmdStr, "GET_STORED_DATAPOINTS") == 0)
-      {
         return ClientCommand::GET_STORED_DATAPOINTS;
-      }
-      else if (strcmp(cmdStr, "TOGGLE_LIGHTS") == 0)
-      {
-        return ClientCommand::TOGGLE_LIGHTS;
-      }
-      else if (strcmp(cmdStr, "SET_TEMPERATURE") == 0)
-      {
-        return ClientCommand::SET_TEMPERATURE;
-      }
-      else if (strcmp(cmdStr, "SET_HUMIDITY") == 0)
-      {
-        return ClientCommand::SET_HUMIDITY;
-      }
-      else if (strcmp(cmdStr, "SET_LIGHT_INTENSITY") == 0)
-      {
-        return ClientCommand::SET_LIGHT_INTENSITY;
-      }
-      return ClientCommand::INVALID_COMMAND;
     }
+    else if (strcmp(cmdStr, "TOGGLE_LIGHTS") == 0)
+    {
+        return ClientCommand::TOGGLE_LIGHTS;
+    }
+    else if (strcmp(cmdStr, "SET_TEMPERATURE") == 0)
+    {
+        return ClientCommand::SET_TEMPERATURE;
+    }
+    else if (strcmp(cmdStr, "SET_HUMIDITY") == 0)
+    {
+        return ClientCommand::SET_HUMIDITY;
+    }
+    else if (strcmp(cmdStr, "SET_LIGHT_INTENSITY") == 0)
+    {
+        return ClientCommand::SET_LIGHT_INTENSITY;
+    }
+    return ClientCommand::INVALID_COMMAND;
+}

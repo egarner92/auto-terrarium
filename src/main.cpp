@@ -3,6 +3,7 @@
 #include "time.h"
 #include "config.h"
 #include "UDPServer.h"
+#include "AnalogSensor.h"
 
 // Declare helper functions
 void connectWifi();
