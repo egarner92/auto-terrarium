@@ -22,28 +22,34 @@ void PID::compute()
     // Handle millis rollover
     if (now < lastTime)
     {
-        lastTime = now;
+        PID::resetTime();
         return;
     }
 
-    // If time to update
-    if (dt >= 1.0/freq)
-    {
-        // Compute proportional term
-        double error = setpoint - input;
-        double proportional = kp * error;
+    // Compute proportional term
+    double error = setpoint - input;
+    double proportional = kp * error;
 
-        // Increment integral term
-        integral += error * dt;
+    // Increment integral term
+    integral += error * dt;
 
-        // Compute derivative term
-        double derivative = (error - lastError) / dt;
+    // Compute derivative term
+    double derivative = (error - lastError) / dt;
 
-        // Set output
-        output = proportional + (ki * integral) + (kd * derivative);
+    // Set output
+    output = proportional + (ki * integral) + (kd * derivative);
 
-        // Update state variables
-        lastTime = now;
-        lastError = error;
+    // Update state variables
+    lastTime = now;
+    lastError = error;
     }
+
+    void PID::resetTime()
+    {
+        lastTime = millis();
+    }
+
+    int PID::getFreq()
+    {
+        return freq;
     }

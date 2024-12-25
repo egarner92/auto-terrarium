@@ -9,18 +9,26 @@
 #include "AHTSensor.h"
 #include "PID.h"
 
-
 // Declare helper functions
 void connectWifi();
 void configureClock();
 
 // Declare global variables
 UDPServer server; // Server for remote monitoring and control
-AHTSensor aht; // temperature and humidity sensor
+AHTSensor aht;    // temperature and humidity sensor
 AnalogActuator heater("heater", HEATER_PIN);
 AnalogActuator fan("fan", FAN_PIN);
 DigitalActuator pump("pump", PUMP_PIN);
 
+int testSensorPin = 32;
+int testActuatorPin = 33;
+AnalogSensor testSensor("testSensor", testSensorPin);
+AnalogActuator testActuator("testActuator", testActuatorPin);
+int testInput, testOutput, testSetpoint;
+int testFreq = 1000;
+PID testPID(testInput, testOutput, testSetpoint, testFreq);
+
+unsigned long lastTime;
 
 void setup()
 {
@@ -33,10 +41,22 @@ void setup()
 
   // Configure NTP clock
   configureClock();
+
+  lastTime = millis();
 }
 
 void loop()
 {
+  unsigned long now = millis();
+
+  if (1.0 / (now - lastTime) >= testPID.getFreq())
+  {
+    testInput = testSensor.read();
+    testPID.compute();
+    testActuator.set(testOutput);
+  }
+
+  lastTime = now;
 }
 
 // Helper function definitions
