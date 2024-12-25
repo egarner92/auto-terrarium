@@ -5,6 +5,7 @@
 #include "UDPServer.h"
 #include "AnalogSensor.h"
 #include "analogActuator.h"
+#include "digitalActuator.h"
 #include "AHTSensor.h"
 
 
