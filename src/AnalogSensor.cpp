@@ -3,7 +3,10 @@
 #include <string>
 #include <string_view>
 
-AnalogSensor::AnalogSensor(std::string name, int pin) : name(name), pin(pin) {}
+AnalogSensor::AnalogSensor(std::string name, int pin) : name(name), pin(pin) 
+{
+    pinMode(pin, INPUT);
+}
 
 int AnalogSensor::read()
 {
