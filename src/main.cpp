@@ -2,13 +2,16 @@
 #include <WiFi.h>
 #include "time.h"
 #include "config.h"
+#include "UDPServer.h"
 
-// put function declarations here:
+// Declare helper functions
 void connectWifi();
 void configureClock();
 
+// Declare global variables
+UDPServer server;
+
 void setup() {
-  // put your setup code here, to run once:
   
   // Initialize serial communication
   Serial.begin(115200);
@@ -22,7 +25,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
 }
 
 // put function definitions here:
