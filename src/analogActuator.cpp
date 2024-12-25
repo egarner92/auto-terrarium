@@ -12,4 +12,5 @@ name(name), pin(pin), pwmChannel(pwmChannel), freq(freq), resolution(resolution)
 void AnalogActuator::set(int dutyCycle)
 {
     ledcWrite(pwmChannel, dutyCycle);
+    this->dutyCycle = dutyCycle;
 }
