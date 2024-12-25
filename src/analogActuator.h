@@ -11,6 +11,7 @@ private:
     const int pwmChannel;
     const int freq;
     const int resolution;
+    int dutyCycle;
 
 public:
     AnalogActuator(std::string name, int pin, int pwmChannel = 0, int freq = 5000, int resolution = 8);

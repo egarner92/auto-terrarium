@@ -7,6 +7,7 @@
 #include "analogActuator.h"
 #include "digitalActuator.h"
 #include "AHTSensor.h"
+#include "PID.h"
 
 
 // Declare helper functions
