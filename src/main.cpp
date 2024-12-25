@@ -4,6 +4,9 @@
 #include "config.h"
 #include "UDPServer.h"
 #include "AnalogSensor.h"
+#include "analogActuator.h"
+#include "AHTSensor.h"
+
 
 // Declare helper functions
 void connectWifi();
@@ -11,6 +14,8 @@ void configureClock();
 
 // Declare global variables
 UDPServer server; // Server for remote monitoring and control
+AHTSensor aht;
+
 
 void setup()
 {
